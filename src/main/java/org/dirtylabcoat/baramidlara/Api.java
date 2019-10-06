@@ -21,28 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package org.dirtylabcoat.baramidlara;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
+import java.io.Serializable;
 
-public class App {
+public class Api implements Serializable {
 
-    public static void main(String[] args) throws Exception {
+    private static final long serialVersionUID = -5096976596729026071L;
 
-        ApiServlet apiServlet = new ApiServlet();
-        //TODO: Double init is ugly, fix plz
-        apiServlet.init();
-        ApiConfig apiConfig = apiServlet.getConfig();
-        Server server = new Server(apiConfig.getPort());
-	ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        server.setHandler(context);
-        context.addServlet(new ServletHolder(apiServlet), "/*");
+    private String path;
+    private String method;
+    private String response;
 
-        server.start();
+    public String getPath() {
+        return path;
+    }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public boolean existsAndIsAllowed(String path, String method) {
+        return path.equals(this.path) && method.equalsIgnoreCase(this.method);
+    }
+
+    @Override
+    public String toString() {
+        return "{ \"path\": \"" + path + "\", \"method\": \"" + method + "\", \"response\": \"" + response + "\" }";
     }
 
 }

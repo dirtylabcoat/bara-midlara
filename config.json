@@ -1,12 +1,16 @@
-[
-    {
-        "path": "/api/this",
-        "method": "GET",
-        "response": "demo/this.json"
-    },
-    {
-        "path": "/another-api/that",
-        "method": "POST",
-        "response": "demo/that.json"
-    }
-]
+{
+    "port": 8080,
+    "apis":
+            [
+                {
+                    "path": "/api/this",
+                    "method": "GET",
+                    "response": "this-get.json"
+                },
+                {
+                    "path": "/another-api/that",
+                    "method": "POST",
+                    "response": "that-post.json"
+                }
+            ]
+}

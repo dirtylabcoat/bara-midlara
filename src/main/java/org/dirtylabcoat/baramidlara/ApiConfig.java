@@ -21,28 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 package org.dirtylabcoat.baramidlara;
 
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
+import java.io.Serializable;
+import java.util.List;
 
-public class App {
+public class ApiConfig implements Serializable {
 
-    public static void main(String[] args) throws Exception {
+    private static final long serialVersionUID = 967708286057192473L;
 
-        ApiServlet apiServlet = new ApiServlet();
-        //TODO: Double init is ugly, fix plz
-        apiServlet.init();
-        ApiConfig apiConfig = apiServlet.getConfig();
-        Server server = new Server(apiConfig.getPort());
-	ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-        server.setHandler(context);
-        context.addServlet(new ServletHolder(apiServlet), "/*");
+    private int port;
+    private List<Api> apis;
 
-        server.start();
+    public int getPort() {
+        return port;
+    }
 
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public List<Api> getApis() {
+        return apis;
+    }
+
+    public void setApis(List<Api> apis) {
+        this.apis = apis;
+    }
+
+    @Override
+    public String toString() {
+        String o = "{ \"port\": " + port + ", \"apis\": [ ";
+        for (int i = 0; i < apis.size(); i++) {
+            o = o + apis.get(i);
+            if (i < apis.size() - 1) {
+                o = o + ", ";
+            }
+        }
+        o = o + " ] }";
+        return o;
     }
 
 }
