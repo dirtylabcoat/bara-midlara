@@ -102,6 +102,8 @@ public class ApiServlet extends HttpServlet {
             this.methods.put(method, new HashMap<>());
         });
         String configFile = System.getProperty("api.config");
+        //TODO: Default config = $PWD/config.json
+        //TODO: Read JSON-format instead
         Properties properties = new Properties();
         try {
             try (InputStream is = new FileInputStream(configFile)) {
