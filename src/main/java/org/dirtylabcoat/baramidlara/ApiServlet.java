@@ -101,7 +101,9 @@ public class ApiServlet extends HttpServlet {
         Arrays.asList(supportedHttpMethods).stream().forEach((method) -> {
             this.methods.put(method, new HashMap<>());
         });
-        String configFile = System.getProperty("api.config");
+        String configFile = System.getProperty("api.config") == null
+                ? "demo/demo.config"
+                : System.getProperty("api.config");
         Properties properties = new Properties();
         try {
             try (InputStream is = new FileInputStream(configFile)) {
