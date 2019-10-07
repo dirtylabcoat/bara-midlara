@@ -102,7 +102,7 @@ public class ApiServlet extends HttpServlet {
             this.methods.put(method, new HashMap<>());
         });
         String configFile = System.getProperty("api.config") == null
-                ? "demo/demo.config"
+                ? "demo.config"
                 : System.getProperty("api.config");
         Properties properties = new Properties();
         try {

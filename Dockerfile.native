@@ -1,0 +1,5 @@
+FROM alpine:latest
+COPY bara-midlara /
+COPY demo.config /
+COPY th*.json /
+ENTRYPOINT ["./bara-midlara"]

@@ -1,0 +1,5 @@
+native-image --no-server --no-fallback --static -H:IncludeResourceBundles=javax.servlet.LocalStrings -H:IncludeResourceBundles=javax.servlet.http.LocalStrings -jar target/bara-midlara.jar
+
+docker build -t bara-midlara:jvm -f Dockerfile .
+docker build -t bara-midlara:native -f Dockerfile.native .
+docker run -it --name bm -p8080:8080 bara-midlara:native
