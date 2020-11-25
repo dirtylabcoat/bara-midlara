@@ -8,7 +8,7 @@
                     "response": "this-get.json"
                 },
                 {
-                    "path": "/another-api/that",
+                    "path": "/api/that",
                     "method": "POST",
                     "response": "that-post.json"
                 }
